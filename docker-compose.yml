@@ -12,6 +12,13 @@ services:
     restart: unless-stopped
     networks:
       - rag-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     # Note: On first startup, pull the required models via:
     # docker exec -it schema_rag_ollama ollama pull qwen2.5-coder:7b
     # docker exec -it schema_rag_ollama ollama pull nomic-embed-text
