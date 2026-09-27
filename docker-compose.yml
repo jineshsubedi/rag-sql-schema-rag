@@ -9,7 +9,7 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
-    restart: unless-stopped
+    restart: "no"
     networks:
       - rag-network
     # Note: On first startup, pull the required models via:
@@ -27,7 +27,7 @@ services:
       - "6334:6334"   # gRPC API
     volumes:
       - qdrant_data:/qdrant/storage
-    restart: unless-stopped
+    restart: "no"
     networks:
       - rag-network
 
@@ -54,7 +54,7 @@ services:
     depends_on:
       - ollama
       - qdrant
-    restart: unless-stopped
+    restart: "no"
 
   # ---------------------------------------------------------------------------
   # 4. Streamlit Frontend Service
@@ -70,7 +70,7 @@ services:
       - BACKEND_URL=http://127.0.0.1:8000
     depends_on:
       - backend
-    restart: unless-stopped
+    restart: "no"
 
 volumes:
   ollama_data:
